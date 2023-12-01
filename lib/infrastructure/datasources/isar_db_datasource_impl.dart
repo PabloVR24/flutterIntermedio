@@ -18,20 +18,21 @@ class IsarDBDatasource extends LocalDBDataSource {
   }
 
   @override
-  Future<void> insertPokeomn({required Pokemon pokemon}) {
-    // TODO: implement insertPokeomn
-    throw UnimplementedError();
+  Future<void> insertPokeomn({required Pokemon pokemon}) async {
+    final isar = await db;
+    final done = isar.writeTxnSync(() => isar.pokemons.putSync(pokemon));
+    print(done);
   }
 
   @override
-  Future<List<Pokemon>> localPokemons() {
-    // TODO: implement localPokemons
-    throw UnimplementedError();
+  Future<List<Pokemon>> localPokemons() async {
+    final isar = await db;
+    return isar.pokemons.where().findAll();
   }
 
   @override
-  Future<int> pokemonCount() {
-    // TODO: implement pokemonCount
-    throw UnimplementedError();
+  Future<int> pokemonCount() async {
+    final isar = await db;
+    return isar.pokemons.count();
   }
 }

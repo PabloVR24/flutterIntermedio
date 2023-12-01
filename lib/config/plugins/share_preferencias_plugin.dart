@@ -14,6 +14,6 @@ class SharePreferenciasPlugin {
 
   static Future<bool?> getBool(String key) async {
     final prefs = await _getPrefs();
-    return prefs.getBool(key) ?? true;
+    return prefs.getBool(key);
   }
 }
